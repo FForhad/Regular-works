@@ -205,12 +205,34 @@ int main()
     string s,p,t;
     char ch,ss[100];
 
-    cin>>a;
-    while(a>1)
+    cin>>_;
+    while(_--)
     {
-        e+=(ceil(a/3));
+
+
+    cin>>a;
+    here:
+        e=0;f=0;
+    while(a>=20500)
+    {
+        e=a/20500;
+        a%=20500;
     }
-    cout<<e<<endl;
+    while(a>=2050)
+    {
+        f=a/2050;
+        a%=2050;
+    }
+    if(a>0 && (e+f)<2050)
+        cout<<-1<<endl;
+    else if((e+f)>=2050)
+    {
+        a=e+f;goto here;
+    }
+    else
+        cout<<e+f<<endl;
+
+    }
 
 
 return 0;

@@ -1,20 +1,39 @@
 #include<bits/stdc++.h>
 typedef long long int ll;
 using namespace std;
-ll x[900000];
-multimap<ll, ll> invert(map<ll, ll> & mp)
-{
-	multimap<ll, ll> multiMap;
-	for (auto it=mp.begin(); it!=mp.end(); it++)
-	{
-		multiMap.insert(make_pair(it->second, it->first));
-	}
+ll x[1100000];
 
-	return multiMap;
+ll mostFrequent(ll arr[], ll n,ll a,ll b)
+{
+    // Sort the array
+    //sort(arr, arr + n);
+
+    // find the max frequency using linear traversal
+    ll max_count = 1, res = arr[a], curr_count = 1;
+    for (int i = a+1; i <=b; i++) {
+        if (arr[i] == arr[i - 1])
+            curr_count++;
+        else {
+            if (curr_count > max_count) {
+                max_count = curr_count;
+                res = arr[i - 1];
+            }
+            curr_count = 1;
+        }
+    }
+
+    // If last element is most frequent
+    if (curr_count > max_count)
+    {
+        max_count = curr_count;}
+        res = max_count;
+
+
+    return res;
 }
 int main()
 {
-    ll a,b,c,d,e=0,_;
+    ll a,b,c,d,e=1,_;
     while(cin>>_ && _!=0)
     {
         cin>>a;
@@ -25,13 +44,9 @@ int main()
         while(a--)
         {
             cin>>c>>d;
-            map<ll,ll>mp;
-            for(int i=c;i<=d;i++)
-            {
-                mp[x[i]]++;
-            }
-            e=0;
-            sort(mp.begin(),mp.end(),greater<ll>());
+            //map<int,int>mp;
+            cout<<mostFrequent(x,(d-c)+1,c,d)<<endl;
+            //cout<<e<<endl;
         }
     }
     return 0;
